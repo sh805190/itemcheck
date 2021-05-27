@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <h1>To-Do List</h1>
-    <h2 id="list-summary">{{ listSummary }}</h2>
+    <h2 id="list-summary" ref="listSummary" tabindex="-1">
+    {{ listSummary }}
+    </h2>
 
     <to-do-form @todo-added="addToDo"></to-do-form>
     <ul aria-labelledby="list-summary" class="stack-large">
@@ -62,6 +64,7 @@ export default {
     deleteToDo(toDoId) {
       const itemIndex = this.ToDoItems.findIndex((item) => item.id === toDoId);
       this.ToDoItems.splice(itemIndex, 1);
+      this.$refs.listSummary.focus();
     },
     editToDo(toDoId, newLabel) {
       const toDoToEdit = this.ToDoItems.find((item) => item.id === toDoId);
